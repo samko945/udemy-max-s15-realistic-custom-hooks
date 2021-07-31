@@ -13,15 +13,11 @@ function App() {
 		}
 		setTasks(loadedTasks);
 	};
-	const {
-		isLoading,
-		error,
-		sendRequest: fetchTasks,
-	} = useHttp(transformTasks, "https://max-udemy-s15-custom-hooks-default-rtdb.firebaseio.com/tasks.json");
+	const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
 	useEffect(() => {
-		fetchTasks();
-	}, []);
+		fetchTasks(transformTasks, "https://max-udemy-s15-custom-hooks-default-rtdb.firebaseio.com/tasks.json");
+	}, [fetchTasks]);
 
 	const taskAddHandler = (task) => {
 		setTasks((prevTasks) => prevTasks.concat(task));
